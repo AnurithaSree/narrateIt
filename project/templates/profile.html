@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Website</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='box.css') }}">  
+</head>
+<body>
+    <h1>Enter the matter</h1>
+    <form action="/box" method="post" enctype="multipart/form-data">
+        <div class="box">
+            <textarea name="description"></textarea>
+        </div>
+        <br><br>
+    </form>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</body>
+</html>
