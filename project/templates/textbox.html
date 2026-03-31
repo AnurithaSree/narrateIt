@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Write Your Story</title>
+</head>
+<body>
+    <h2>Write Your Story</h2>
+    <!-- Display selected image -->
+    <img src="{{ url_for('static', filename=image_filename) }}" width="300"><br><br>
+
+    <!-- Textbox for writing story -->
+    <form action="{{ url_for('submit_story') }}" method="POST">
+        <input type="hidden" name="image_filename" value="{{ image_filename }}">
+        <textarea name="story_text" rows="6" cols="60" placeholder="Write your story here..." required></textarea><br><br>
+        <button type="submit">Submit Story</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NarrateIt - Sign Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: url("{{ url_for('static', filename='bg1.png') }}") no-repeat center center;
+    background-size: contain;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dark overlay */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+/* Signup Box */
+.signup-container {
+    position: relative;
+    background: #FFFFFF20;
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.signup-container h1 {
+    margin-bottom: 10px;
+    color: #2F2F2F;
+}
+
+.signup-container p {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Signup Button */
+.signup-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4e73df;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-btn:hover {
+    background-color: #008000;
+}
+
+.login-text {
+    margin-top: 15px;
+    color: white;
+}
+
+.login-text a {
+    text-decoration: none;
+    color: #00BFFF;
+    font-weight: bold;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="signup-container">
+<h1>Create Account</h1>
+<p>Join NarrateIt and Start Your Story</p>
+
+<form action="/register_user" method="POST">
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" name="name" placeholder="Enter your full name" required>
+</div>
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" name="email" placeholder="Enter your email address" required>
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<input type="password" name="password" placeholder="Enter your password" required>
+</div>
+
+<div class="input-group">
+<label>Confirm Password</label>
+<input type="password" name="confirm_password" placeholder="Confirm your password" required>
+</div>
+
+<button type="submit" class="signup-btn">Sign Up</button>
+
+</form>
+<div class="login-text">
+Already have an account? <a href="/">Login</a>
+</div>
+
+</div>
+
+</body>
+</html>

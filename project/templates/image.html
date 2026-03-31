@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Write Story</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+/* PROFILE */
+.profile-section {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.profile-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PINTEREST LAYOUT */
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 70px;
+}
+
+/* EACH COLUMN */
+.column {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* IMAGE CARD */
+.image-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    transition: 0.2s;
+}
+
+.image-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* IMAGE */
+.image-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* BUTTON */
+.image-card button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-card button:hover {
+    background-color: #45a049;
+}
+
+/* STORY BOX */
+.story-box {
+    display: none;
+    margin-top: 10px;
+}
+
+textarea {
+    width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PROFILE -->
+<div class="profile-section">
+    <a href="{{ url_for('profile') }}" title="{{ username }}">
+        <div class="profile-circle" id="profileCircle">
+            {{ username[0] | upper }}
+        </div>
+    </a>
+</div>
+
+<h2>Select an image to write your story</h2>
+
+<!-- 3 COLUMN PINTEREST GRID -->
+<div class="gallery">
+
+    <div class="column" id="col1"></div>
+    <div class="column" id="col2"></div>
+    <div class="column" id="col3"></div>
+
+</div>
+
+<script>
+// Images from Flask
+let images = {{ images | tojson }};
+
+// Assign images to columns
+images.forEach((img, index) => {
+    let card = document.createElement("div");
+    card.className = "image-card";
+
+    card.innerHTML = `
+        <img src="/static/${img}">
+        <button onclick="showTextbox('${img.replace(/ /g, "_")}')">Write Story</button>
+
+        <div class="story-box" id="box-${img.replace(/ /g, "_")}">
+            <form action="/submit_story" method="POST">
+                <input type="hidden" name="image_filename" value="${img}">
+                <textarea name="story_text" rows="4" required></textarea><br>
+                <button type="submit">Submit Story</button>
+            </form>
+        </div>
+    `;
+
+    // Distribute into 3 columns
+    document.getElementById("col" + ((index % 3) + 1)).appendChild(card);
+});
+
+// Toggle textbox
+function showTextbox(image) {
+    let boxes = document.querySelectorAll('.story-box');
+
+    boxes.forEach(b => {
+        if (b.id !== 'box-' + image) {
+            b.style.display = 'none';
+        }
+    });
+
+    let box = document.getElementById('box-' + image);
+
+    if (box.style.display === 'block') {
+        box.style.display = 'none';
+    } else {
+        box.style.display = 'block';
+    }
+}
+
+// Profile color
+function getColor(letter) {
+    const colors = [
+        "#e74c3c","#3498db","#2ecc71","#9b59b6",
+        "#f39c12","#1abc9c","#d35400","#34495e"
+    ];
+    return colors[letter.charCodeAt(0) % colors.length];
+}
+
+let username = "{{ username }}";
+let firstLetter = username.charAt(0).toUpperCase();
+document.getElementById("profileCircle").style.backgroundColor = getColor(firstLetter);
+</script>
+
+</body>
+</html>

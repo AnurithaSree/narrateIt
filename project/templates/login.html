@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NarrateIt - Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: url("{{ url_for('static', filename='bg1.png') }}") no-repeat center center;
+    background-size: contain;
+    background-color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Box */
+.login-container {
+    background: #FFFFFF20;
+    padding: 20px;
+    border-radius: 15px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    margin-top: 120px;
+}
+
+.login-container h1 {
+    margin-bottom: 10px;
+    color: #4A3F55;
+}
+
+.login-container p {
+    margin-bottom: 25px;
+    color: #2F2F2F;
+}
+
+.input-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 3px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4e73df;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #008000;
+}
+
+.signup-text a {
+    padding: 2px;
+    text-decoration: none;
+    color: #F8F9FA;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+    <h1>NarrateIt</h1>
+    <p>A Perspection that Reflects You</p>
+
+    <form action="/login" method="POST"> 
+        <div class="input-group">
+            <label>Username</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="signup-text">
+        Don’t have an account? <a href="/register">Sign Up</a>
+    </div>
+</div>
+
+</body>
+</html>
